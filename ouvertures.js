@@ -1,21 +1,18 @@
 /* =====================================================
-   CHECKLIST MENTALE GLOBALE (AFFICHÉE À CHAQUE COUP)
-===================================================== */
-const checklistMentale = [
-  "Roi en sécurité ?",
-  "Pièce protégée ?",
-  "Développement ?"
-];
-
-/* =====================================================
    OUVERTURES BLANCS — TOUTES (20 COUPS CHACUNE)
 ===================================================== */
+
 const ouverturesBlancs = {
 
-  /* -------- SYSTÈME DE LONDRES -------- */
   london: {
     nom: "Système de Londres",
     objectif: "Structure solide, répétable, peu de théorie",
+    planMilieuJeu: [
+      "Lancer une attaque à l’aile roi si le centre est fermé",
+      "Manœuvrer le cavalier f3 vers g3 puis h5 ou f5",
+      "Avancer les pions h puis f pour ouvrir des lignes",
+      "N’attaquer que si le roi noir est roqué côté roi"
+    ],
     coups: [
       { coup: "d4", concret: "Le pion dame avance de deux cases" },
       { coup: "Bf4", concret: "Le fou de gauche sort avant e3" },
@@ -40,18 +37,20 @@ const ouverturesBlancs = {
     ]
   },
 
-  /* -------- OUVERTURE ITALIENNE -------- */
   italienne: {
     nom: "Ouverture Italienne",
     objectif: "Développement rapide et pression sur f7",
-	erreurs: [
-    "Sortir la dame trop tôt",
-    "Oublier le roque",
-    "Avancer trop de pions sans développer"
-  ],
-	
-	
-	
+    erreurs: [
+      "Sortir la dame trop tôt",
+      "Oublier le roque",
+      "Avancer trop de pions sans développer"
+    ],
+    planMilieuJeu: [
+      "Prendre le centre avec c3 puis d4 au bon moment",
+      "Placer les tours sur e1 et d1",
+      "Éviter les échanges précipités avant d’avoir l’espace",
+      "Attaquer seulement si le centre s’ouvre favorablement"
+    ],
     coups: [
       { coup: "e4", concret: "Le pion du roi prend le centre" },
       { coup: "Nf3", concret: "Attaque le pion e5" },
@@ -76,10 +75,15 @@ const ouverturesBlancs = {
     ]
   },
 
-  /* -------- RUY LOPEZ -------- */
   ruy_lopez: {
     nom: "Ruy Lopez (Espagnole)",
     objectif: "Pression stratégique durable",
+    planMilieuJeu: [
+      "Maintenir la pression sur le pion e5",
+      "Préparer la poussée d4 pour libérer le centre",
+      "Manœuvrer les cavaliers vers f5 ou g3",
+      "Gagner de l’espace avant toute attaque directe"
+    ],
     coups: [
       { coup: "e4", concret: "Contrôle du centre" },
       { coup: "Nf3", concret: "Attaque le pion e5" },
@@ -104,38 +108,15 @@ const ouverturesBlancs = {
     ]
   },
 
-  /* -------- GAMBIT DAME -------- */
-  gambit_dame: {
-    nom: "Gambit Dame",
-    objectif: "Contrôle du centre et pression positionnelle",
-    coups: [
-      { coup: "d4", concret: "Pion dame au centre" },
-      { coup: "c4", concret: "Offre un pion pour le centre" },
-      { coup: "Nc3", concret: "Développement" },
-      { coup: "Nf3", concret: "Soutien du centre" },
-      { coup: "e3", concret: "Ouvre le fou" },
-      { coup: "Bd3", concret: "Fou actif" },
-      { coup: "0-0", concret: "Roque" },
-      { coup: "Qe2", concret: "Soutien e4" },
-      { coup: "Rd1", concret: "Tour centrale" },
-      { coup: "e4", concret: "Rupture centrale" },
-      { coup: "Be3", concret: "Développement" },
-      { coup: "Rac1", concret: "Tour sur la colonne c" },
-      { coup: "h3", concret: "Prévention" },
-      { coup: "Bg5", concret: "Clouage" },
-      { coup: "Bh4", concret: "Repli" },
-      { coup: "e5", concret: "Gain d’espace" },
-      { coup: "Ne4", concret: "Centralisation" },
-      { coup: "Nd6", concret: "Pression" },
-      { coup: "Bc2", concret: "Diagonale longue" },
-      { coup: "f4", concret: "Lance l’attaque" }
-    ]
-  },
-
-  /* -------- OUVERTURE ANGLAISE -------- */
   anglaise: {
     nom: "Ouverture Anglaise",
     objectif: "Contrôle à distance et flexibilité",
+    planMilieuJeu: [
+      "Contrôler le centre sans l’occuper immédiatement",
+      "Développer un jeu à l’aile dame avec b4 et b5",
+      "Utiliser les fous sur les longues diagonales",
+      "Exploiter les faiblesses créées par l’adversaire"
+    ],
     coups: [
       { coup: "c4", concret: "Contrôle le centre à distance" },
       { coup: "Nc3", concret: "Développement" },
@@ -160,10 +141,15 @@ const ouverturesBlancs = {
     ]
   },
 
-  /* -------- SYSTÈME RÉTI -------- */
   reti: {
     nom: "Système Réti",
     objectif: "Flexibilité maximale et transpositions",
+    planMilieuJeu: [
+      "Choisir la structure centrale en fonction de l’adversaire",
+      "Transposer vers un centre e4 ou d4 favorable",
+      "Limiter l’espace adverse avant de contre-attaquer",
+      "Ne jamais se précipiter dans une attaque directe"
+    ],
     coups: [
       { coup: "Nf3", concret: "Contrôle e5 et d4" },
       { coup: "g3", concret: "Fianchetto" },
@@ -191,13 +177,20 @@ const ouverturesBlancs = {
 };
 
 /* =====================================================
-   DÉFENSES NOIRS — UTILISÉES PAR L’ARBRE DE DÉCISION
+   DÉFENSES NOIRES — UTILISÉES PAR L’ARBRE DE DÉCISION
 ===================================================== */
+
 const defensesNoires = {
 
   caro_kann: {
     nom: "Défense Caro-Kann",
     objectif: "Solidité maximale",
+    planMilieuJeu: [
+      "Maintenir une structure de pions solide sans faiblesses",
+      "Échanger les pièces mineures pour réduire l’initiative blanche",
+      "Placer les tours sur c8 et d8 après la poussée c5",
+      "Jouer en finale si l’attaque blanche ne passe pas"
+    ],
     coups: [
       { coup: "c6", concret: "Prépare d5" },
       { coup: "d5", concret: "Conteste le centre" },
@@ -225,6 +218,12 @@ const defensesNoires = {
   slave: {
     nom: "Défense Slave",
     objectif: "Structure saine et fiable",
+    planMilieuJeu: [
+      "Maintenir une structure de pions solide et flexible",
+      "Développer le fou c8 avant e6",
+      "Échanger les pièces pour réduire l’initiative blanche",
+      "Exploiter les colonnes ouvertes en finale"
+    ],
     coups: [
       { coup: "d5", concret: "Centre" },
       { coup: "c6", concret: "Soutient d5" },
@@ -252,6 +251,12 @@ const defensesNoires = {
   sicilienne: {
     nom: "Défense Sicilienne",
     objectif: "Jeu dynamique et déséquilibré",
+    planMilieuJeu: [
+      "Créer un jeu actif à l’aile dame avec b5 et b4",
+      "Contrôler la colonne c pour les tours",
+      "Accepter le déséquilibre matériel ou structurel",
+      "Contre-attaquer avant que l’attaque blanche n’atteigne le roi"
+    ],
     coups: [
       { coup: "c5", concret: "Asymétrie immédiate" },
       { coup: "d6", concret: "Soutient e5" },

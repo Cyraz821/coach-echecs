@@ -4,110 +4,117 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coach d’ouvertures – Échecs</title>
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#000000">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>♟️ Coach d’ouvertures – Support de partie</h1>
+<header>
+  <h1>♟️ Coach d’ouvertures</h1>
+</header>
 
-<!-- ================= GLOSSAIRE ================= -->
-<section id="glossaire">
-  <h2>📘 Glossaire</h2>
-  <ul>
-    <li><strong>K</strong> : Roi</li>
-    <li><strong>Q</strong> : Dame</li>
-    <li><strong>R</strong> : Tour</li>
-    <li><strong>B</strong> : Fou</li>
-    <li><strong>N</strong> : Cavalier</li>
-    <li><strong>x</strong> : Capture</li>
-    <li><strong>+</strong> : Échec</li>
-    <li><strong>#</strong> : Mat</li>
-  </ul>
-</section>
-
-<!-- ================= CONTROLES ================= -->
+<!-- CONTROLES -->
 <section class="controls">
+  <div class="control-group">
+    <label>Tu joues</label>
+    <select id="camp">
+      <option value="">Choisir…</option>
+      <option value="blanc">Blancs</option>
+      <option value="noir">Noirs</option>
+    </select>
+  </div>
 
-  <label>Tu joues :</label>
-  <select id="camp">
-    <option value="">-- Choisir --</option>
-    <option value="blanc">Blancs</option>
-    <option value="noir">Noirs</option>
-  </select>
-
-  <!-- BLANCS -->
-  <div id="zoneBlanc" class="zone">
-    <label>Ouverture (Blancs) :</label>
+  <div id="zoneBlanc" class="control-group zone">
+    <label>Ouverture (Blancs)</label>
     <select id="ouvertureBlanc"></select>
   </div>
 
-  <!-- NOIRS -->
   <div id="zoneNoir" class="zone">
-    <label>Les Blancs jouent :</label>
-    <select id="premierCoup">
-      <option value="e4">1.e4</option>
-      <option value="d4">1.d4</option>
-      <option value="c4">1.c4</option>
-      <option value="Nf3">1.Nf3</option>
-    </select>
+    <div class="control-group">
+      <label>Les Blancs jouent</label>
+      <select id="premierCoup">
+        <option value="e4">1.e4</option>
+        <option value="d4">1.d4</option>
+        <option value="c4">1.c4</option>
+        <option value="Nf3">1.Nf3</option>
+      </select>
+    </div>
 
-    <label>Ton style :</label>
-    <select id="etat">
-      <option value="solide">Solide</option>
-      <option value="actif">Actif</option>
-      <option value="agressif">Agressif</option>
-    </select>
+    <div class="control-group">
+      <label>Ton style</label>
+      <select id="etat">
+        <option value="solide">Solide</option>
+        <option value="actif">Actif</option>
+        <option value="agressif">Agressif</option>
+      </select>
+    </div>
   </div>
 
-  <button id="btnStart">Démarrer</button>
+  <button id="btnStart" class="primary">Démarrer la partie</button>
 </section>
 
-<!-- ================= CONTENU ================= -->
-<div class="main">
+<!-- CARTE PRINCIPALE -->
+<main class="workspace">
 
-  <div id="echiquier"></div>
+  <!-- GAUCHE -->
+  <section class="left-panel">
+    <div id="echiquier"></div>
 
-  <section id="coach">
-    <h2 id="titre">Choisis ta partie</h2>
-
-    <p id="objectif"></p>
-
-    <!-- REPÈRE PHASE DE JEU -->
-    <div id="phaseJeu" class="phase-ouverture">
-      Phase : Ouverture
-    </div>
-
-    <h3>Coup</h3>
-    <p id="coup"></p>
-
-    <h3>Tu fais quoi concrètement</h3>
-    <p id="concret"></p>
-
-    <h3>❌ Erreurs typiques</h3>
-    <ul id="erreurs"></ul>
-
-    <div class="navigation">
-      <button id="btnPrev" disabled>⬅️ Retour</button>
-      <button id="btnNext" disabled>▶️ Suivant</button>
+    <div id="glossaire">
+      <h3>Aide notation</h3>
+      <ul>
+        <li><strong>K</strong> Roi</li>
+        <li><strong>Q</strong> Dame</li>
+        <li><strong>R</strong> Tour</li>
+        <li><strong>B</strong> Fou</li>
+        <li><strong>N</strong> Cavalier</li>
+        <li><strong>x</strong> Capture</li>
+        <li><strong>+</strong> Échec</li>
+        <li><strong>#</strong> Mat</li>
+        <li><strong>0-0</strong> Petit roque</li>
+        <li><strong>0-0-0</strong> Grand roque</li>
+      </ul>
     </div>
   </section>
-</div>
+
+  <!-- DROITE -->
+  <section class="right-panel">
+    <div id="coach">
+      <h2 id="titre">Choisis une partie</h2>
+      <p id="objectif" class="objectif"></p>
+
+      <div class="coach-section">
+        <span class="label">Coup</span>
+        <p id="coup" class="coup"></p>
+      </div>
+
+      <div class="coach-section">
+        <span class="label">Concrètement</span>
+        <p id="concret"></p>
+      </div>
+
+      <div class="coach-section">
+        <span class="label">Erreurs typiques</span>
+        <ul id="erreurs"></ul>
+      </div>
+
+      <div id="planMilieuJeu" class="coach-section plan" style="display:none;">
+        <span class="label">Plan de milieu de jeu</span>
+        <ul id="planList"></ul>
+      </div>
+
+      <div class="navigation">
+        <button id="btnPrev">← Retour</button>
+        <button id="btnNext">Suivant →</button>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <script src="ouvertures.js"></script>
 <script src="board.js"></script>
 <script src="script.js"></script>
-
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
 
 </body>
 </html>

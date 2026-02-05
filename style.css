@@ -1,99 +1,205 @@
+/* ===============================
+   RESET + BASE
+   =============================== */
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  padding: 15px;
-  max-width: 1200px;
-  margin: auto;
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #f6f7f9;
+  color: #1f2937;
+}
+
+header {
+  padding: 20px 40px;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 15px;
+  margin: 0;
+  font-weight: 600;
 }
 
-.controls,
-#glossaire,
-#coach {
+/* ===============================
+   CONTROLES
+   =============================== */
+
+.controls {
+  display: flex;
+  gap: 16px;
+  padding: 20px 40px;
   background: white;
-  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  align-items: flex-end;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+.controls label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #6b7280;
+}
+
+.controls select {
+  padding: 8px 10px;
   border-radius: 8px;
-  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.controls .primary {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .zone {
   display: none;
-  margin-top: 10px;
 }
 
-.main {
+/* ===============================
+   WORKSPACE
+   =============================== */
+
+.workspace {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 32px;
+  padding: 32px 40px;
+}
+
+/* ===============================
+   LEFT PANEL
+   =============================== */
+
+.left-panel {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 #echiquier {
-  width: 440px;
-  height: 440px;
-  max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-  border: 3px solid #333;
-  margin: auto;
+  grid-template-columns: repeat(8, 52px);
+  grid-template-rows: repeat(8, 52px);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .case {
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 32px;
+  justify-content: center;
+  font-size: 30px;
 }
 
-.case.claire { background: #eee; }
-.case.foncee { background: #777; color: white; }
+.case.claire {
+  background: #f0d9b5;
+}
 
-/* ===== PHASE DE JEU ===== */
-#phaseJeu {
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  text-align: center;
+.case.foncee {
+  background: #b58863;
+  color: white;
+}
+
+/* ===============================
+   GLOSSAIRE
+   =============================== */
+
+#glossaire {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+#glossaire h3 {
+  margin-top: 0;
   margin-bottom: 10px;
+  font-size: 15px;
 }
 
-.phase-ouverture {
-  background: #e3f2fd;
-  border: 2px solid #2196f3;
+#glossaire ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
 }
 
-.phase-transition {
-  background: #fff8e1;
-  border: 2px solid #ff9800;
+/* ===============================
+   RIGHT PANEL (COACH)
+   =============================== */
+
+.right-panel {
+  background: white;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
 }
 
-.phase-milieu {
-  background: #fce4ec;
-  border: 2px solid #e91e63;
+#coach h2 {
+  margin-top: 0;
+  font-size: 22px;
 }
 
-/* ===== NAVIGATION ===== */
+.objectif {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.coach-section {
+  margin-top: 18px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.coup {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.plan {
+  background: #eef2ff;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* ===============================
+   NAVIGATION
+   =============================== */
+
 .navigation {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .navigation button {
   flex: 1;
   padding: 10px;
-  font-size: 16px;
-}
-
-@media (min-width: 900px) {
-  .main {
-    flex-direction: row;
-  }
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  cursor: pointer;
 }
