@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 15px;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.controls,
+#glossaire,
+#coach {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* ⚠️ NE PLUS UTILISER display:none */
+.zone {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+/* zone visible */
+.zone.active {
+  visibility: visible;
+  height: auto;
+  overflow: visible;
+  margin-top: 10px;
+}
+
+.controls label {
+  display: block;
+  margin-top: 8px;
+}
+
+.controls select,
+.controls button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#echiquier {
+  width: 440px;
+  height: 440px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 3px solid #333;
+  margin: auto;
+}
+
+.case {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.case.claire { background: #eee; }
+.case.foncee { background: #777; color: white; }
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.navigation button {
+  padding: 10px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.navigation button:first-child {
+  margin-right: 10px;
+}
+
+@media (min-width: 900px) {
+  .main {
+    flex-direction: row;
+  }
+
+  #echiquier {
+    margin: 0;
+  }
+}

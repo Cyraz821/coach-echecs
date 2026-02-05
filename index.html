@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Coach d’ouvertures aux échecs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+</head>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+
+<body>
+
+
+<h1>♟️ Coach d’ouvertures – Partie réelle</h1>
+
+<div id="glossaire">
+  <h2>📘 Glossaire – Lire les coups</h2>
+  <ul>
+    <li><strong>K</strong> : Roi</li>
+    <li><strong>Q</strong> : Dame</li>
+    <li><strong>R</strong> : Tour</li>
+    <li><strong>B</strong> : Fou</li>
+    <li><strong>N</strong> : Cavalier</li>
+    <li><strong>x</strong> : Capture</li>
+    <li><strong>+</strong> : Échec</li>
+    <li><strong>#</strong> : Échec et mat</li>
+    <li><strong>0-0</strong> : Petit roque</li>
+    <li><strong>0-0-0</strong> : Grand roque</li>
+  </ul>
+</div>
+
+<div class="controls">
+
+  <label>Tu joues :</label>
+  <select id="camp">
+    <option value="">-- Choisir --</option>
+    <option value="blanc">Blancs</option>
+    <option value="noir">Noirs</option>
+  </select>
+
+  <!-- BLANCS -->
+  <div id="zoneBlanc" class="zone">
+    <label>Ouverture (Blancs) :</label>
+    <select id="ouvertureBlanc"></select>
+  </div>
+
+  <!-- NOIRS -->
+  <div id="zoneNoir" class="zone">
+    <label>Les Blancs jouent :</label>
+    <select id="premierCoup">
+      <option value="e4">1.e4</option>
+      <option value="d4">1.d4</option>
+      <option value="c4">1.c4</option>
+      <option value="Nf3">1.Nf3</option>
+    </select>
+
+    <label>Ton style :</label>
+    <select id="etat">
+      <option value="solide">Solide</option>
+      <option value="actif">Actif</option>
+      <option value="agressif">Agressif</option>
+    </select>
+  </div>
+
+  <button id="btnStart">Démarrer</button>
+</div>
+
+<div class="main">
+  <div id="echiquier"></div>
+
+  <div id="coach">
+    <h2 id="titre">Choisis ta partie</h2>
+    <p id="objectif"></p>
+
+    <h3>Coup</h3>
+    <p id="coup"></p>
+
+    <h3>Tu fais quoi concrètement</h3>
+    <p id="concret"></p>
+
+    <h3>Checklist mentale</h3>
+    <ul id="checklist"></ul>
+
+    <div class="navigation">
+      <button id="btnPrev">⬅️ Retour</button>
+      <button id="btnNext">Coup suivant ▶️</button>
+    </div>
+  </div>
+</div>
+
+<script src="ouvertures.js"></script>
+<script src="board.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
