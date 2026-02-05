@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Encodage standard -->
   <meta charset="UTF-8">
-  <title>Coach d’ouvertures aux échecs</title>
+
+  <!-- Responsive mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Titre de l’application -->
+  <title>Coach d’ouvertures aux échecs</title>
+
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
 </head>
-
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
-
 
 <body>
 
-
+<!-- ================= TITRE ================= -->
 <h1>♟️ Coach d’ouvertures – Partie réelle</h1>
 
-<div id="glossaire">
+<!-- ================= GLOSSAIRE ================= -->
+<!-- Toujours visible pour apprendre à lire les coups -->
+<section id="glossaire">
   <h2>📘 Glossaire – Lire les coups</h2>
   <ul>
     <li><strong>K</strong> : Roi</li>
@@ -35,10 +39,12 @@ if ("serviceWorker" in navigator) {
     <li><strong>0-0</strong> : Petit roque</li>
     <li><strong>0-0-0</strong> : Grand roque</li>
   </ul>
-</div>
+</section>
 
-<div class="controls">
+<!-- ================= CONTROLES ================= -->
+<section class="controls">
 
+  <!-- Choix du camp -->
   <label>Tu joues :</label>
   <select id="camp">
     <option value="">-- Choisir --</option>
@@ -46,13 +52,13 @@ if ("serviceWorker" in navigator) {
     <option value="noir">Noirs</option>
   </select>
 
-  <!-- BLANCS -->
+  <!-- Options BLANCS -->
   <div id="zoneBlanc" class="zone">
     <label>Ouverture (Blancs) :</label>
     <select id="ouvertureBlanc"></select>
   </div>
 
-  <!-- NOIRS -->
+  <!-- Options NOIRS -->
   <div id="zoneNoir" class="zone">
     <label>Les Blancs jouent :</label>
     <select id="premierCoup">
@@ -70,13 +76,18 @@ if ("serviceWorker" in navigator) {
     </select>
   </div>
 
+  <!-- Lancement -->
   <button id="btnStart">Démarrer</button>
-</div>
+</section>
 
+<!-- ================= CONTENU ================= -->
 <div class="main">
+
+  <!-- Échiquier -->
   <div id="echiquier"></div>
 
-  <div id="coach">
+  <!-- Coach -->
+  <section id="coach">
     <h2 id="titre">Choisis ta partie</h2>
     <p id="objectif"></p>
 
@@ -89,16 +100,25 @@ if ("serviceWorker" in navigator) {
     <h3>Checklist mentale</h3>
     <ul id="checklist"></ul>
 
+    <!-- Navigation -->
     <div class="navigation">
-      <button id="btnPrev">⬅️ Retour</button>
-      <button id="btnNext">Coup suivant ▶️</button>
+      <button id="btnPrev" disabled>⬅️ Retour</button>
+      <button id="btnNext" disabled>Coup suivant ▶️</button>
     </div>
-  </div>
+  </section>
 </div>
 
+<!-- ================= SCRIPTS ================= -->
 <script src="ouvertures.js"></script>
 <script src="board.js"></script>
 <script src="script.js"></script>
+
+<!-- Enregistrement du service worker (PWA offline) -->
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
 
 </body>
 </html>

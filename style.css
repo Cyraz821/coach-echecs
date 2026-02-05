@@ -1,7 +1,9 @@
+/* Empêche les bugs de largeur */
 * {
   box-sizing: border-box;
 }
 
+/* Base générale */
 body {
   font-family: Arial, sans-serif;
   background: #f2f2f2;
@@ -11,11 +13,13 @@ body {
   margin-inline: auto;
 }
 
+/* Titre principal */
 h1 {
   text-align: center;
   margin-bottom: 15px;
 }
 
+/* Blocs blancs */
 .controls,
 #glossaire,
 #coach {
@@ -25,22 +29,13 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* ⚠️ NE PLUS UTILISER display:none */
+/* Zones conditionnelles (Blanc / Noir) */
 .zone {
-  visibility: hidden;
-  height: 0;
-  overflow: hidden;
-  margin-top: 0;
-}
-
-/* zone visible */
-.zone.active {
-  visibility: visible;
-  height: auto;
-  overflow: visible;
+  display: none;
   margin-top: 10px;
 }
 
+/* Champs de formulaire */
 .controls label {
   display: block;
   margin-top: 8px;
@@ -53,12 +48,14 @@ h1 {
   font-size: 16px;
 }
 
+/* Layout principal */
 .main {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+/* Échiquier */
 #echiquier {
   width: 440px;
   height: 440px;
@@ -70,6 +67,7 @@ h1 {
   margin: auto;
 }
 
+/* Cases */
 .case {
   display: flex;
   align-items: center;
@@ -80,22 +78,20 @@ h1 {
 .case.claire { background: #eee; }
 .case.foncee { background: #777; color: white; }
 
+/* Navigation */
 .navigation {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   margin-top: 15px;
 }
 
 .navigation button {
+  flex: 1;
   padding: 10px;
   font-size: 16px;
-  flex: 1;
 }
 
-.navigation button:first-child {
-  margin-right: 10px;
-}
-
+/* Desktop */
 @media (min-width: 900px) {
   .main {
     flex-direction: row;
