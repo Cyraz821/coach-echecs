@@ -1,33 +1,36 @@
-const pieces = {
-  r:"♜", n:"♞", b:"♝", q:"♛", k:"♚", p:"♟",
-  R:"♖", N:"♘", B:"♗", Q:"♕", K:"♔", P:"♙"
-};
+// board.js
+// ===============================
+// Échiquier simple et fiable
+// ===============================
 
-let board = [];
+const boardInitial = [
+  ["♜","♞","♝","♛","♚","♝","♞","♜"],
+  ["♟","♟","♟","♟","♟","♟","♟","♟"],
+  ["","","","","","","",""],
+  ["","","","","","","",""],
+  ["","","","","","","",""],
+  ["","","","","","","",""],
+  ["♙","♙","♙","♙","♙","♙","♙","♙"],
+  ["♖","♘","♗","♕","♔","♗","♘","♖"]
+];
 
 function initBoard() {
-  board = [
-    ["r","n","b","q","k","b","n","r"],
-    ["p","p","p","p","p","p","p","p"],
-    ["","","","","","","",""],
-    ["","","","","","","",""],
-    ["","","","","","","",""],
-    ["","","","","","","",""],
-    ["P","P","P","P","P","P","P","P"],
-    ["R","N","B","Q","K","B","N","R"]
-  ];
-  renderBoard();
-}
+  const container = document.getElementById("echiquier");
+  if (!container) return;
 
-function renderBoard() {
-  const e = document.getElementById("echiquier");
-  e.innerHTML = "";
-  for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 8; x++) {
-      const d = document.createElement("div");
-      d.className = "case " + ((x + y) % 2 === 0 ? "claire" : "foncee");
-      if (board[y][x]) d.textContent = pieces[board[y][x]];
-      e.appendChild(d);
+  container.innerHTML = "";
+
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const square = document.createElement("div");
+      square.classList.add("case");
+
+      const isLight = (row + col) % 2 === 0;
+      square.classList.add(isLight ? "claire" : "foncee");
+
+      square.textContent = boardInitial[row][col];
+
+      container.appendChild(square);
     }
   }
 }
