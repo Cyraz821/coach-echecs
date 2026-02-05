@@ -1,7 +1,6 @@
 /* ===============================
-   RESET + BASE
+   BASE
    =============================== */
-
 * {
   box-sizing: border-box;
 }
@@ -25,7 +24,6 @@ h1 {
 /* ===============================
    CONTROLES
    =============================== */
-
 .controls {
   display: flex;
   gap: 16px;
@@ -33,6 +31,7 @@ h1 {
   background: white;
   border-bottom: 1px solid #e5e7eb;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .control-group {
@@ -69,9 +68,8 @@ h1 {
 }
 
 /* ===============================
-   WORKSPACE
+   WORKSPACE (PC)
    =============================== */
-
 .workspace {
   display: grid;
   grid-template-columns: 460px 1fr;
@@ -82,7 +80,6 @@ h1 {
 /* ===============================
    LEFT PANEL
    =============================== */
-
 .left-panel {
   display: flex;
   flex-direction: column;
@@ -117,7 +114,6 @@ h1 {
 /* ===============================
    GLOSSAIRE
    =============================== */
-
 #glossaire {
   background: white;
   border-radius: 14px;
@@ -144,7 +140,6 @@ h1 {
 /* ===============================
    RIGHT PANEL (COACH)
    =============================== */
-
 .right-panel {
   background: white;
   border-radius: 18px;
@@ -188,7 +183,6 @@ h1 {
 /* ===============================
    NAVIGATION
    =============================== */
-
 .navigation {
   display: flex;
   gap: 12px;
@@ -202,4 +196,48 @@ h1 {
   border: 1px solid #d1d5db;
   background: #f9fafb;
   cursor: pointer;
+}
+
+/* ===============================
+   MOBILE ADAPTATION
+   =============================== */
+@media (max-width: 900px) {
+
+  header {
+    padding: 16px 20px;
+  }
+
+  .controls {
+    padding: 16px 20px;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .left-panel {
+    align-items: center;
+  }
+
+  #echiquier {
+    grid-template-columns: repeat(8, 44px);
+    grid-template-rows: repeat(8, 44px);
+  }
+
+  .case {
+    font-size: 24px;
+  }
+
+  #glossaire {
+    width: 100%;
+  }
+
+  #glossaire ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .right-panel {
+    margin-top: 20px;
+  }
 }
