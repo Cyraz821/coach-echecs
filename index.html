@@ -1,32 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Encodage standard -->
   <meta charset="UTF-8">
-
-  <!-- Responsive mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Titre de l’application -->
-  <title>Coach d’ouvertures aux échecs</title>
+  <title>Coach d’ouvertures – Échecs</title>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
 
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= TITRE ================= -->
-<h1>♟️ Coach d’ouvertures – Partie réelle</h1>
+<h1>♟️ Coach d’ouvertures – Support de partie</h1>
 
 <!-- ================= GLOSSAIRE ================= -->
-<!-- Toujours visible pour apprendre à lire les coups -->
 <section id="glossaire">
-  <h2>📘 Glossaire – Lire les coups</h2>
+  <h2>📘 Glossaire</h2>
   <ul>
     <li><strong>K</strong> : Roi</li>
     <li><strong>Q</strong> : Dame</li>
@@ -35,16 +27,13 @@
     <li><strong>N</strong> : Cavalier</li>
     <li><strong>x</strong> : Capture</li>
     <li><strong>+</strong> : Échec</li>
-    <li><strong>#</strong> : Échec et mat</li>
-    <li><strong>0-0</strong> : Petit roque</li>
-    <li><strong>0-0-0</strong> : Grand roque</li>
+    <li><strong>#</strong> : Mat</li>
   </ul>
 </section>
 
 <!-- ================= CONTROLES ================= -->
 <section class="controls">
 
-  <!-- Choix du camp -->
   <label>Tu joues :</label>
   <select id="camp">
     <option value="">-- Choisir --</option>
@@ -52,13 +41,13 @@
     <option value="noir">Noirs</option>
   </select>
 
-  <!-- Options BLANCS -->
+  <!-- BLANCS -->
   <div id="zoneBlanc" class="zone">
     <label>Ouverture (Blancs) :</label>
     <select id="ouvertureBlanc"></select>
   </div>
 
-  <!-- Options NOIRS -->
+  <!-- NOIRS -->
   <div id="zoneNoir" class="zone">
     <label>Les Blancs jouent :</label>
     <select id="premierCoup">
@@ -76,20 +65,23 @@
     </select>
   </div>
 
-  <!-- Lancement -->
   <button id="btnStart">Démarrer</button>
 </section>
 
 <!-- ================= CONTENU ================= -->
 <div class="main">
 
-  <!-- Échiquier -->
   <div id="echiquier"></div>
 
-  <!-- Coach -->
   <section id="coach">
     <h2 id="titre">Choisis ta partie</h2>
+
     <p id="objectif"></p>
+
+    <!-- REPÈRE PHASE DE JEU -->
+    <div id="phaseJeu" class="phase-ouverture">
+      Phase : Ouverture
+    </div>
 
     <h3>Coup</h3>
     <p id="coup"></p>
@@ -97,23 +89,20 @@
     <h3>Tu fais quoi concrètement</h3>
     <p id="concret"></p>
 
-    <h3>Checklist mentale</h3>
-    <ul id="checklist"></ul>
+    <h3>❌ Erreurs typiques</h3>
+    <ul id="erreurs"></ul>
 
-    <!-- Navigation -->
     <div class="navigation">
       <button id="btnPrev" disabled>⬅️ Retour</button>
-      <button id="btnNext" disabled>Coup suivant ▶️</button>
+      <button id="btnNext" disabled>▶️ Suivant</button>
     </div>
   </section>
 </div>
 
-<!-- ================= SCRIPTS ================= -->
 <script src="ouvertures.js"></script>
 <script src="board.js"></script>
 <script src="script.js"></script>
 
-<!-- Enregistrement du service worker (PWA offline) -->
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");

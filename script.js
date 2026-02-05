@@ -1,44 +1,27 @@
-/* ================= ÉTAT GLOBAL ================= */
-
-// Ouverture actuellement chargée
 let ouverture = null;
-
-// Index du coup affiché
 let index = 0;
 
-/* ================= INITIALISATION ================= */
+// Repères universels
+const COUP_FIN_OUVERTURE = 10;
+const COUP_MILIEU_JEU = 12;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Initialise l’échiquier dès le chargement
   initBoard();
 
-  // Récupération des éléments DOM
   const camp = document.getElementById("camp");
   const zoneBlanc = document.getElementById("zoneBlanc");
   const zoneNoir = document.getElementById("zoneNoir");
   const ouvertureBlanc = document.getElementById("ouvertureBlanc");
 
-  const premierCoup = document.getElementById("premierCoup");
-  const etat = document.getElementById("etat");
-
   const btnStart = document.getElementById("btnStart");
   const btnNext = document.getElementById("btnNext");
   const btnPrev = document.getElementById("btnPrev");
 
-  /* ================= CHOIX DU CAMP ================= */
-
   camp.addEventListener("change", () => {
-
-    // Cache toutes les zones
     zoneBlanc.style.display = "none";
     zoneNoir.style.display = "none";
 
-    // Réinitialise les boutons
-    btnNext.disabled = true;
-    btnPrev.disabled = true;
-
-    // Affiche les options selon le camp
     if (camp.value === "blanc") {
       zoneBlanc.style.display = "block";
       chargerOuverturesBlancs();
@@ -48,8 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
       zoneNoir.style.display = "block";
     }
   });
-
-  /* ================= CHARGEMENT BLANCS ================= */
 
   function chargerOuverturesBlancs() {
     ouvertureBlanc.innerHTML = "";
@@ -61,83 +42,100 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* ================= DÉMARRER ================= */
-
-  btnStart.addEventListener("click", () => {
-
-    // Réinitialisation
+  btnStart.onclick = () => {
     index = 0;
     initBoard();
 
-    // Sélection de l’ouverture
     if (camp.value === "blanc") {
       ouverture = ouverturesBlancs[ouvertureBlanc.value];
-    } else if (camp.value === "noir") {
-      ouverture = choisirDefenseNoire(premierCoup.value, etat.value);
     } else {
-      return;
+      ouverture = choisirDefenseNoire(
+        document.getElementById("premierCoup").value,
+        document.getElementById("etat").value
+      );
     }
 
-    // Mise à jour UI
     document.getElementById("titre").textContent = ouverture.nom;
     document.getElementById("objectif").textContent = ouverture.objectif;
 
+    afficherErreurs();
+    afficher();
+
     btnNext.disabled = false;
     btnPrev.disabled = true;
+  };
 
-    afficher();
-  });
-
-  /* ================= NAVIGATION ================= */
-
-  btnNext.addEventListener("click", () => {
+  btnNext.onclick = () => {
+    if (!ouverture) return;
     if (index < ouverture.coups.length - 1) {
       index++;
       afficher();
     }
-  });
+  };
 
-  btnPrev.addEventListener("click", () => {
+  btnPrev.onclick = () => {
+    if (!ouverture) return;
     if (index > 0) {
       index--;
       afficher();
     }
-  });
+  };
 });
-
-/* ================= AFFICHAGE ================= */
 
 function afficher() {
 
-  // Sécurité
-  if (!ouverture) return;
+  const numeroCoup = index + 1;
 
-  // Boutons
-  document.getElementById("btnPrev").disabled = index === 0;
-  document.getElementById("btnNext").disabled = index === ouverture.coups.length - 1;
-
-  // Texte principal
   document.getElementById("coup").textContent =
-    `Coup ${index + 1} / ${ouverture.coups.length} : ${ouverture.coups[index].coup}`;
+    `Coup ${numeroCoup} / ${ouverture.coups.length} : ${ouverture.coups[index].coup}`;
 
   document.getElementById("concret").textContent =
-    ouverture.coups[index].concret;
+    "👉 " + ouverture.coups[index].concret;
 
-  // Checklist
-  const ul = document.getElementById("checklist");
+  afficherPhaseJeu(numeroCoup);
+
+  document.getElementById("btnPrev").disabled = index === 0;
+  document.getElementById("btnNext").disabled = index === ouverture.coups.length - 1;
+}
+
+function afficherPhaseJeu(numeroCoup) {
+  const phase = document.getElementById("phaseJeu");
+
+  if (numeroCoup < COUP_FIN_OUVERTURE) {
+    phase.textContent = "Phase : Ouverture";
+    phase.className = "phase-ouverture";
+    return;
+  }
+
+  if (numeroCoup < COUP_MILIEU_JEU) {
+    phase.textContent = "Phase : Transition vers le milieu de jeu";
+    phase.className = "phase-transition";
+    return;
+  }
+
+  phase.textContent = "Phase : Milieu de jeu (les coups sont indicatifs)";
+  phase.className = "phase-milieu";
+}
+
+function afficherErreurs() {
+  const ul = document.getElementById("erreurs");
   ul.innerHTML = "";
-  checklistMentale.forEach(item => {
+
+  if (!ouverture.erreurs) return;
+
+  ouverture.erreurs.forEach(err => {
     const li = document.createElement("li");
-    li.textContent = item;
+    li.textContent = "❌ " + err;
     ul.appendChild(li);
   });
 }
 
-/* ================= ARBRE NOIR ================= */
-
 function choisirDefenseNoire(premier, style) {
-  if (premier === "e4") return style === "agressif" ? defensesNoires.sicilienne : defensesNoires.caro_kann;
+  if (premier === "e4") return style === "agressif"
+    ? defensesNoires.sicilienne
+    : defensesNoires.caro_kann;
+
   if (premier === "d4") return defensesNoires.slave;
-  if (premier === "c4") return defensesNoires.sicilienne;
-  return defensesNoires.slave;
+
+  return defensesNoires.sicilienne;
 }

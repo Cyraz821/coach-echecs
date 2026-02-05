@@ -44,6 +44,14 @@ const ouverturesBlancs = {
   italienne: {
     nom: "Ouverture Italienne",
     objectif: "Développement rapide et pression sur f7",
+	erreurs: [
+    "Sortir la dame trop tôt",
+    "Oublier le roque",
+    "Avancer trop de pions sans développer"
+  ],
+	
+	
+	
     coups: [
       { coup: "e4", concret: "Le pion du roi prend le centre" },
       { coup: "Nf3", concret: "Attaque le pion e5" },

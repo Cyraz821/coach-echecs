@@ -1,25 +1,20 @@
-/* Empêche les bugs de largeur */
 * {
   box-sizing: border-box;
 }
 
-/* Base générale */
 body {
   font-family: Arial, sans-serif;
   background: #f2f2f2;
-  margin: 0;
   padding: 15px;
   max-width: 1200px;
-  margin-inline: auto;
+  margin: auto;
 }
 
-/* Titre principal */
 h1 {
   text-align: center;
   margin-bottom: 15px;
 }
 
-/* Blocs blancs */
 .controls,
 #glossaire,
 #coach {
@@ -29,33 +24,17 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* Zones conditionnelles (Blanc / Noir) */
 .zone {
   display: none;
   margin-top: 10px;
 }
 
-/* Champs de formulaire */
-.controls label {
-  display: block;
-  margin-top: 8px;
-}
-
-.controls select,
-.controls button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-
-/* Layout principal */
 .main {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Échiquier */
 #echiquier {
   width: 440px;
   height: 440px;
@@ -67,22 +46,44 @@ h1 {
   margin: auto;
 }
 
-/* Cases */
 .case {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   font-size: 32px;
 }
 
 .case.claire { background: #eee; }
 .case.foncee { background: #777; color: white; }
 
-/* Navigation */
+/* ===== PHASE DE JEU ===== */
+#phaseJeu {
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.phase-ouverture {
+  background: #e3f2fd;
+  border: 2px solid #2196f3;
+}
+
+.phase-transition {
+  background: #fff8e1;
+  border: 2px solid #ff9800;
+}
+
+.phase-milieu {
+  background: #fce4ec;
+  border: 2px solid #e91e63;
+}
+
+/* ===== NAVIGATION ===== */
 .navigation {
   display: flex;
   gap: 10px;
-  margin-top: 15px;
 }
 
 .navigation button {
@@ -91,13 +92,8 @@ h1 {
   font-size: 16px;
 }
 
-/* Desktop */
 @media (min-width: 900px) {
   .main {
     flex-direction: row;
-  }
-
-  #echiquier {
-    margin: 0;
   }
 }
